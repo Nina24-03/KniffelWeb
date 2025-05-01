@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kniffel Punkteblock</title>
+    <style>
+        table, td, th { border: 1px solid black; border-collapse: collapse; padding: 5px; }
+        input { width: 50px; text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>Kniffel Punkteblock</h2>
+    <form method="post">
+        <table>
+            <tr>
+                <th>Kategorie</th>
+                {% for spieler in spieler_punkte %}
+                    <th>{{ spieler }}</th>
+                {% endfor %}
+            </tr>
+            {% for kategorie in kategorien %}
+            <tr>
+                <td>{{ kategorie }}</td>
+                {% for spieler in spieler_punkte %}
+                    <td><input type="text" name="{{ spieler }}_{{ kategorie }}" value="{{ spieler_punkte[spieler][kategorie] }}"></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <button type="submit">Speichern</button>
+        <a href="{{ url_for('reset') }}"><button type="button">Zurücksetzen</button></a>
+    </form>
+</body>
+</html>
